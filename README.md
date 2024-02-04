@@ -12,14 +12,14 @@ This implenetatin achive this with simple means comprising just of a bunch of sc
 
 Typically a systemd service script will start venus as a background service using either chroot or systemd-nspawn to instantiate the system.
 
-To use  systemd-nspawn would be the preffered method to start the system since it preovides a pretty god sanbox isolation from the host system and provides a good virtualized network domain.
+To use  systemd-nspawn would be the preferred method to start the system since it preovides a pretty god sanbox isolation from the host system and provides a good virtualized network domain.
 Unfortunately systemd-nspawn does not today allow for wireless network address familys so we are limited to only ehternet connectivity here and that excludes the bluetooth feature of the system.
 
 For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.
 
-In summary the chroot:ed system gives 100% connectivity (throgh ethernet) to the outher world such as VRM and signalK etc.
+In summary the chroot:ed system gives 100% connectivity (through ethernet) to the outher world such as VRM and signalK etc.
 
-The systemd-nspawn managed system gives the same but not bluethoot.
+The systemd-nspawn managed system gives the same but not bluetooth.
 
 This is still in early developmemt and perhaps other containers will do the job better such as docker.
 
