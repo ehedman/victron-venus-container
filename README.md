@@ -8,7 +8,7 @@ The issue (for me) is that this software is intended to be installed as wic imag
 In my case I already have rapserry pi running in my yacht running serveral of my other applications avaiable here on github.
 I don't want to have the venus applcation running the entire platform but rather as a background service and have the Qt-gui opened up on demand from my own application  [sdlSpeedometer](https://github.com/ehedman/sdlSpeedometer) (or from a shell commnd).
 
-This implenetatin achive this with simple means comprising just of a bunch of sctrpis and a mounted (or copied) standat venus (wic) SDcard to the host.
+This implenetatin achive this with simple means comprising just of a bunch of sctrpis and a mounted (or copied) standard venus (wic) SDcard to the host.
 
 Typically a systemd service script will start venus as a background service using either chroot or systemd-nspawn to instantiate the system.
 
@@ -24,5 +24,7 @@ The systemd-nspawn managed system gives the same but not bluethoot.
 This is still in early developmemt and perhaps other containers will do the job better such as docker.
 
 An interesting consequence of ths implementation is that venus now is running on a bookworm OS on a raperry pi 4 with a 6.10 Linux  kernel as opposed to the standard boot image with kernel 5.10
+
+Please not that this stuff is still kind of experimental loosely bound to v3.20-37 a 7" hdmi display and local adaptations may be necessary.
 
 

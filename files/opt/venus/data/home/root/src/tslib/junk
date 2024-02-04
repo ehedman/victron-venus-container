@@ -1,0 +1,94 @@
+17627 execve("/usr/bin/ts_calibrate", ["/usr/bin/ts_calibrate"], 0xff89524c /* 18 vars */) = 0
+17627 brk(NULL)                         = 0xee7000
+17627 mmap2(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xf7d56000
+17627 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+17627 fstat64(3, {st_mode=S_IFREG|0644, st_size=14249, ...}) = 0
+17627 mmap2(NULL, 14249, PROT_READ, MAP_PRIVATE, 3, 0) = 0xf7d52000
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/lib/libdl.so.2", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+17627 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0(\v@A4\0\0\0"..., 512) = 512
+17627 fstat64(3, {st_mode=S_IFREG|0755, st_size=11012, ...}) = 0
+17627 mmap2(0x41400000, 73780, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x41400000
+17627 mprotect(0x41402000, 61440, PROT_NONE) = 0
+17627 mmap2(0x41411000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x41411000
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/lib/tls/v8l/neon/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/v8l/neon/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/v8l/neon/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/v8l/neon", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/v8l/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/v8l/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/v8l/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/v8l", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/neon/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/neon/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/neon/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/neon", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/tls/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/tls", 0xffe2f680)    = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/v8l/neon/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/v8l/neon/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/v8l/neon/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/v8l/neon", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/v8l/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/v8l/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/v8l/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/v8l", 0xffe2f680)    = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/neon/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/neon/vfp", 0xffe2f680) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/neon/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/neon", 0xffe2f680)   = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/vfp/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 stat64("/lib/vfp", 0xffe2f680)    = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/lib/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+17627 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0,\302)A4\0\0\0"..., 512) = 512
+17627 fstat64(3, {st_mode=S_IFREG|0755, st_size=1251480, ...}) = 0
+17627 mmap2(0x41280000, 1317732, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x41280000
+17627 mprotect(0x413ad000, 65536, PROT_NONE) = 0
+17627 mmap2(0x413bd000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x12d000) = 0x413bd000
+17627 mmap2(0x413c0000, 7012, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x413c0000
+17627 close(3)                          = 0
+17627 set_tls(0xf7d57040)               = 0
+17627 mprotect(0x413bd000, 4096, PROT_READ) = 0
+17627 mprotect(0x41411000, 4096, PROT_READ) = 0
+17627 mprotect(0x27000, 4096, PROT_READ) = 0
+17627 mprotect(0x41231000, 4096, PROT_READ) = 0
+17627 munmap(0xf7d52000, 14249)         = 0
+17627 rt_sigaction(SIGSEGV, {sa_handler=0x11fa4, sa_mask=[SEGV], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x412b2680}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+17627 rt_sigaction(SIGINT, {sa_handler=0x11fa4, sa_mask=[INT], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x412b2680}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+17627 rt_sigaction(SIGTERM, {sa_handler=0x11fa4, sa_mask=[TERM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x412b2680}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+17627 brk(NULL)                         = 0xee7000
+17627 brk(0xf08000)                     = 0xf08000
+17627 openat(AT_FDCWD, "/dev/input/input3", O_RDWR) = -1 ENOENT (No such file or directory)
+17627 openat(AT_FDCWD, "/dev/input", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_CLOEXEC|O_DIRECTORY) = 3
+17627 fstat64(3, {st_mode=S_IFDIR|0755, st_size=260, ...}) = 0
+17627 getdents64(3, /* 13 entries */, 32768) = 392
+17627 getdents64(3, /* 0 entries */, 32768) = 0
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/dev/input/event0", O_RDONLY) = 3
+17627 ioctl(3, EVIOCGPROP(4), [ 0 ])    = 4
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/dev/input/event1", O_RDONLY) = 3
+17627 ioctl(3, EVIOCGPROP(4), [ 0 ])    = 4
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/dev/input/event2", O_RDONLY) = 3
+17627 ioctl(3, EVIOCGPROP(4), [ 0 ])    = 4
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/dev/input/event3", O_RDONLY) = 3
+17627 ioctl(3, EVIOCGPROP(4), [INPUT_PROP_DIRECT]) = 4
+17627 close(3)                          = 0
+17627 openat(AT_FDCWD, "/dev/input/event3", O_RDWR) = 3
+17627 openat(AT_FDCWD, "/etc/ts.conf", O_RDONLY) = 4
+17627 fstat64(4, {st_mode=S_IFREG|0644, st_size=79, ...}) = 0
+17627 read(4, "module_raw input\nmodule median d"..., 4096) = 79
+17627 openat(AT_FDCWD, "/usr/lib/ts/median.so", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+17627 write(2, "Couldn't load module median\n", 28) = 28
+17627 close(4)                          = 0
+17627 write(2, "ts_config: No such file or direc"..., 37) = 37
+17627 close(3)                          = 0
+17627 write(2, "ts_setup: No such file or direct"..., 36) = 36
+17627 exit_group(1)                     = ?
+17627 +++ exited with 1 +++

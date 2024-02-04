@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "*** starting node-red-venus ***"
+exec 2>&1
+export HOME=/data/home/nodered && /usr/bin/prepare-node-red-venus.sh && exec setpriv --init-groups --reuid nodered --regid nodered /usr/bin/node-red-venus.sh

@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "*** starting venus-html5-logger ***"
+exec 2>&1
+exec setuidgid nobody softlimit -d 10000000 -s 1000000 -a 10000000 gwsocket --stdout

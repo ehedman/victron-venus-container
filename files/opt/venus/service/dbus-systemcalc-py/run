@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "*** starting dbus-systemcalc-py ***"
+exec 2>&1
+exec softlimit -d 100000000 -s 1000000 -a 100000000 /opt/victronenergy/dbus-systemcalc-py/dbus_systemcalc.py

@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "*** starting service-advertiser ***"
+exec 2>&1
+exec /opt/victronenergy/service-advertiser/navico-announcement.sh 80 /app

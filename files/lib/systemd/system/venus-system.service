@@ -1,0 +1,16 @@
+# Systemd resource file
+[Unit]
+DefaultDependencies=no
+Description=Victron venus application
+After=networking.service
+ConditionPathExists=/opt/venus
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/venus
+ExecStart=/usr/local/bin/venus-boot.sh  $ROOTDIR $METHOD
+RemainAfterExit=no
+User=root
+
+[Install]
+WantedBy=sysinit.target

@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "*** starting signalk-server ***"
+exec 2>&1
+/usr/bin/prepare-signalk.sh && exec setpriv --init-groups --reuid signalk --regid signalk /usr/bin/start-signalk.sh
