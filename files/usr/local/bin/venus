@@ -1,2 +1,2 @@
 #!/bin/sh
-chroot /venus
+chroot "$(cat /run/venus-root)"
