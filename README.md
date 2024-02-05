@@ -46,4 +46,7 @@ Assuming here that the modified venus wic image is available (mounted or copied)
 For the latter case, the remote console won't be available from VRM, but still online remotely if your firewall takes care of the redirection of port 80->82.<br>
 This behaviour is valid for docker and chroot but systemd-nspawn has a virtualization of venus eth0 to make it appear as a truly bridged networked device with dhcp client features.
 
+### What about 32 and 64 bit systems
+Bookworm 32-bit has still a 64 bit kernel and it is running 32 bit binaries in user space. This implementation is tested on such a system and 64 bit bookworm is not tested.<br>
+This explains why we are loading a linux/arm64/v8 docker to the system.
 
