@@ -5,6 +5,18 @@ function doChroot
     exec chroot "$1" /etc/init.d/venus-manager.sh boot
 }
 
+function doDocker
+{
+    exec docker run --rm \
+     --privileged \
+     --hostname=venus \
+     --net=host \
+     -v/"$1":/opt \
+     -v/run/udev/data:/opt/data/udev \
+     --platform linux/arm64/v8 arm64v8/debian \
+    sh -c 'chroot /opt /etc/init.d/venus-manager.sh boot'
+}
+
 function doNspawn
 {
     exec systemd-nspawn -D  "$1" --link-journal=no \
@@ -42,6 +54,9 @@ case "$2" in
     systemd-nspawn)
         BOOTM=doNspawn
     ;;
+    docker)
+        BOOTM=doDocker
+    ;;
     *)
     echo "Error (arg2): $2 is not a vlaid boot method"
     exit 1
@@ -55,7 +70,6 @@ if [ ! -d "$1"/service ]; then
 fi
 
 ROOT="$1"
-
 
 if [ -d "$ROOT"/run/dbus ]; then
     echo "Already running. Can't be restarted, Please reboot the system"
@@ -76,7 +90,9 @@ if [ -d "$ROOT"/data/udev ] && [ -d /run/udev/data ]; then
 
     echo  "$ROOT" >/run/venus-root
 
-    mount -B /run/udev/data "$ROOT"/data/udev &>/dev/null
+    if test -e /opt/venus/data/udev/mp; then
+        mount -B /run/udev/data "$ROOT"/data/udev &>/dev/null
+    fi
 
     "$BOOTM" "$ROOT"
 fi

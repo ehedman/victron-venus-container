@@ -1,0 +1,3 @@
+ROOTDIR=/opt/venus
+METHOD=docker
+
