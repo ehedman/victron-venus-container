@@ -13,7 +13,7 @@ This implenetatin achive this with simple means comprising just of a bunch of sc
 Typically a systemd service script will start venus as a background service using either a docker, chroot or systemd-nspawn to instantiate the system.
 
 To use  systemd-nspawn would be a preferred method to start the system since it preovides a pretty god sanbox isolation from the host system and provides a good virtualized network domain.
-Unfortunately systemd-nspawn does not today allow for wireless network address familys so we are limited to only ehternet connectivity here and that excludes the bluetooth feature of the system.
+Unfortunately systemd-nspawn (macvlan interface) does not today allow for wireless network address familys so we are limited to only ehternet connectivity here and that excludes the bluetooth feature of the system.
 
 For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.
 
@@ -42,9 +42,18 @@ Assuming here that the modified venus wic image is available (mounted or copied)
 - /usr/local/bin/venus-boot.sh [ rootdir for venus ] [ method=chroot:systemd-nspawn:docker ]
 - To start the Qt-gui on the raperry-pi display: /usr/local/bin/venus-start-gui (from shell or from shell call from another app)
 - The remote console is always active but may run on port 82 (if another web server uses port 80). This can be altered in /etc/init.d/venus-manager.sh as seen from the venus rootfs.
+- For the same reason the sshd port is shifted to port 23.
 
 For the latter case, the remote console won't be available from VRM, but still online remotely if your firewall takes care of the redirection of port 80->82.<br>
 This behaviour is valid for docker and chroot but systemd-nspawn has a virtualization of venus eth0 to make it appear as a truly bridged networked device with dhcp client features.
+
+### NOTES
+- The reboot function in /opt/victronenergy/gui/qml/PageSettingsGeneral.qml is now altered to Qt.quit()
+
+### host network interface renaming
+Since the bookworm OS default network interface name (when set to predictable in raspi-config) is set to end0, then a renaming is necessary since venus is in numerous places in scripts is hardcoded to eth0.
+You may add this rule into /etc/udev/rules.d/99-<some file><br>
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="e4:5f:01:9a:c1:7a", NAME="eth0"
 
 ### What about 32 and 64 bit systems
 Bookworm 32-bit has still a 64 bit kernel and it is running 32 bit binaries in user space. This implementation is tested on such a system and 64 bit bookworm is not tested.<br>
