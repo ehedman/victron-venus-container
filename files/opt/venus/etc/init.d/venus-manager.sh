@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BT="no"
+
 if [ "$1" == "boot" ]; then
 
     if test -d /sys/class/net/mv-eth0; then
@@ -9,18 +11,19 @@ if [ "$1" == "boot" ]; then
         mount /dev/pts
         mount /data/log
         sed -i /82/s//80/ /etc/nginx/sites-enabled/default_server
-        svc -t /service/dbus-ble-sensors /service/vesmart-server
+        sed -i /'Port 23'/s//'Port 22'/ etc/ssh/sshd_config
 
         ifup eth0
         udhcpc -i eth0
 
     else
-        # This is  for chroot booted system
+        # This is  for chroot/docker booted system
         mount -a
-        # The line below is only necessary of a web server is already running on the 'host'
+        # The lines below are only necessary if a web and/or an sshd server is already running on the 'host'
         # I.e, the remote console must be invoked with the :82 port declaration on the url line.
         sed -i /80/s//82/ /etc/nginx/sites-enabled/default_server
-        sh /lib/udev/bt-config hci0
+        sed -i /'Port 22'/s//'Port 23'/ etc/ssh/sshd_config
+        BT="yes"
     fi
 
 
@@ -33,6 +36,8 @@ if [ "$1" == "boot" ]; then
     mkdir /run/dbus
     mkdir /run/lock
     mkdir -p /var/volatile/log
+    mkdir -p /var/volatile/services
+    mkdir -p /var/volatile/tmp
     mkdir -p /var/lock/swupdate
     mkdir -p /var/volatile/log/nginx
     mkdir /run/nginx
@@ -74,6 +79,10 @@ if [ "$1" == "boot" ]; then
         esac                  
     done
 
+    if [ "$BT" = "yes" ]; then
+        sh /lib/udev/bt-config hci0
+    fi
+
     sleep 4
 
     {
@@ -96,9 +105,17 @@ if [ "$1" == "boot" ]; then
         /bin/bash /opt/victronenergy/ssh-tunnel/setup-tunnel.sh &
         /usr/bin/python3 -u /opt/victronenergy/mqtt-rpc/mqtt-rpc.py &
 
+        if [ "$BT" = "yes" ]; then
+            svc -u /service/dbus-ble-sensors /service/vesmart-server
+        else
+            svc -t /service/dbus-ble-sensors /service/vesmart-server
+        fi
+
         sleep 5
 
-        /etc/init.d/start-gui.sh start-gui-vnc
+        /etc/init.d/start-gui.sh start-gui-vnc &
+
+        bash
 
     } 2>&1 | tee -a /var/log/venus-manager
 fi
