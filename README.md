@@ -51,8 +51,8 @@ This behaviour is valid for docker and chroot but systemd-nspawn has a virtualiz
 - The reboot function in /opt/victronenergy/gui/qml/PageSettingsGeneral.qml is now altered to Qt.quit()
 
 ### host network interface renaming
-Since the bookworm OS default network interface name (when set to predictable in raspi-config) is set to end0, then a renaming is necessary since venus is in numerous places in scripts is hardcoded to eth0.
-You may add this rule into /etc/udev/rules.d/99-<some file><br>
+Since the bookworm OS default network interface name (when set to predictable in raspi-config) is set to end0, then a renaming is necessary since venus is in numerous places in scripts hardcoded to eth0.
+You may add this rule into /etc/udev/rules.d/99-(some file)<br>
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="e4:5f:01:9a:c1:7a", NAME="eth0"
 
 ### What about 32 and 64 bit systems
