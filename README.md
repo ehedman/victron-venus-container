@@ -27,7 +27,8 @@ An interesting consequence of ths implementation is that venus now is running on
 
 Please not that this stuff is still kind of experimental loosely bound to venus v3.20-37 a 7" hdmi display, Bookworm on rasperry pi 4 Rev 1.5 . Local adaptations may be necessary.
 
-To start with docker, an initial container must be created:  # docker run -it --platform linux/arm64/v8 arm64v8/debian
+To start with docker, an initial container must be created:
+- # docker run -it --platform linux/arm64/v8 arm64v8/debian
 
 ### To test docker  stand-alone:
 - with bash only: docker run --rm -it --privileged  --hostname=venus --net=host  -v/opt/venus:/opt  -v/run/udev/data:/opt/data/udev --platform linux/arm64/v8 arm64v8/debian  bash
