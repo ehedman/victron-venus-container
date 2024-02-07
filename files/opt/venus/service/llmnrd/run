@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting llmnrd ***"
-exec 2>&1
-exec setuidgid nobody /usr/sbin/llmnrd -H venus -6

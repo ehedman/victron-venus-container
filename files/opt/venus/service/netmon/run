@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting netmon ***"
-exec 2>&1
-exec /opt/victronenergy/netmon/netmon

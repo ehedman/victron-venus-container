@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting simple-upnpd ***"
-exec 2>&1
-exec /bin/start-simple-upnpd

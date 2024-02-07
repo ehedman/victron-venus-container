@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting nginx ***"
-exec 2>&1
-exec /usr/sbin/start-nginx.sh

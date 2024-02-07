@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting dbus-modbus-client ***"
-exec 2>&1
-exec /opt/victronenergy/dbus-modbus-client/dbus-modbus-client.py

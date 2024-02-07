@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting ppp ***"
-exec 2>&1
-exec /usr/sbin/pppd call provider nodetach

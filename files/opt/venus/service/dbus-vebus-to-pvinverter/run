@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "*** starting dbus-vebus-to-pvinverter ***"
-exec 2>&1
-exec softlimit -d 100000000 -s 1000000 -a 100000000 /opt/victronenergy/dbus-vebus-to-pvinverter/dbus_vebus_to_pvinverter.py
