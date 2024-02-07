@@ -1,5 +1,5 @@
-#PARTUUID=3cedfd53-02	/               ext4    defaults,noatime  0       1
-#PARTUUID=3cedfd53-01	/boot		vfat    defaults          0       2
+#PARTUUID=a23c4d6f-01 /u-boot vfat    defaults        0       0
+#PARTUUID=a23c4d6f-02 /       ext4    defaults,noatime  0       1
 proc	/proc                proc       defaults              0  0
 devtmpfs /dev                devtmpfs   defaults
 devpts	/dev/pts             devpts     mode=0620,gid=5       0  0

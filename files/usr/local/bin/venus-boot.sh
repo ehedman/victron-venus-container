@@ -80,7 +80,12 @@ rm -f /run/venus-root
 
 umount "$ROOT"/lib/modules &>/dev/null
 
-if [ -d "$ROOT"/lib/overlay/upper ] && [ -d "$ROOT"/lib/overlay/work  ] && [ -d "$ROOT"/lib/modules ]; then
+if ! mkdir -p "$ROOT"/lib/overlay/upper "$ROOT"/lib/overlay/work; then
+    echo "Error: failed to create folders for overlayfs"
+    exit 1
+fi
+
+if [ -d "$ROOT"/lib/modules ]; then
     if ! mount overlay -t overlay -t overlay -o lowerdir=/lib/modules,upperdir="$ROOT"/lib/overlay/upper,workdir="$ROOT"/lib/overlay/work "$ROOT"/lib/modules &>/dev/null; then
         echo "CRITICAL: Failed to overlay-fs to $ROOT/lib/modules"
     fi
@@ -90,7 +95,7 @@ if [ -d "$ROOT"/data/udev ] && [ -d /run/udev/data ]; then
 
     echo  "$ROOT" >/run/venus-root
 
-    if test -e /opt/venus/data/udev/mp; then
+    if test -e "$ROOT"/data/udev/mp; then
         mount -B /run/udev/data "$ROOT"/data/udev &>/dev/null
     fi
 

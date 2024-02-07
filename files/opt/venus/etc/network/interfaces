@@ -6,7 +6,7 @@ iface lo inet loopback
 
 # Wireless interfaces
 # outcommented: managed by connman
-#iface wlan0 inet dhcp
+# iface wlan0 inet dhcp
 #       wireless_mode managed
 #       wireless_essid any
 #       wpa-driver wext
@@ -37,3 +37,4 @@ iface ap0 inet static
 auto eth0
 iface eth0 inet manual
     pre-up if [ -e /sys/class/net/mv-eth0 ] ; then ip link set mv-eth0 name eth0 ;fi
+

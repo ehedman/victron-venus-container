@@ -1,0 +1,2 @@
+DAEMON_OPTS="-c /etc/nginx/nginx.conf"
+#DAEMON_OPTS="-c /etc/nginx/nginx-testmode.conf"

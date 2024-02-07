@@ -17,15 +17,19 @@ Unfortunately systemd-nspawn (macvlan interface) does not today allow for wirele
 
 For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.
 
+### Make sure venus not hijacking your other network interfaces
+As explained above, I want to have two wifi APs on the host side untouched by venus.
+- Add interface names to the file /etc/connman/main.conf at line beginning with NetworkInterfaceBlacklist=
+
 In summary the chroot:ed system and docker gives 100% connectivity (through ethernet) to the outher world such as VRM and signalK etc.
 
 The systemd-nspawn managed system gives the same but not bluetooth.
 
 This is still in early developmemt and perhaps other containers will do the job better.
 
-An interesting consequence of ths implementation is that venus now is running on a bookworm 32-bit OS on a raperry pi 4 with a 6.10 Linux kernel as opposed to the standard boot image with kernel 5.10
+An interesting consequence of ths implementation is that venus now is running on a bookworm 32-bit OS on a raperry pi 4 with a 6.10 64bit Linux kernel as opposed to the standard boot image with kernel 5.10
 
-Please note that this stuff is still kind of experimental loosely bound to venus v3.20-37 a 7" hdmi display, Bookworm on rasperry pi 4 Rev 1.5 . Local adaptations may be necessary.
+Please note that this stuff is still kind of experimental loosely bound to venus v3.30-2 a 7" hdmi display, Bookworm on rasperry pi 4 Rev 1.5. Local adaptations may be necessary.
 
 To start with docker, an initial container must be created:
 -  docker run -it --platform linux/arm64/v8 arm64v8/debian

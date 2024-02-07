@@ -9,6 +9,7 @@ ConditionPathExists=/opt/venus
 Type=simple
 EnvironmentFile=/etc/default/venus
 ExecStart=/usr/local/bin/venus-boot.sh  $ROOTDIR $METHOD
+ExecStop=/bin/sh -c "docker stop $(docker ps | grep debian | awk '{print $1}')"
 RemainAfterExit=no
 User=root
 
