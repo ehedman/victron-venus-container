@@ -13,7 +13,7 @@ This implenetatin achive this with simple means comprising just of a bunch of sc
 Typically a systemd service script will start venus as a background service using either a docker, chroot or systemd-nspawn to instantiate the system.
 
 To use  systemd-nspawn would be a preferred method to start the system since it preovides a pretty good sanbox isolation from the host system and provides a good virtualized network domain.
-Unfortunately systemd-nspawn (macvlan interface) does not today allow for wireless network address familys so we are limited to only ehternet connectivity and that excludes the bluetooth feature of the system.
+Unfortunately systemd-nspawn (macvlan interface) does not today allow for wireless network address familys so for outgoing bluethooth traffic (bluetoothd) we are limited to only ehternet connectivity and that excludes the bluetooth feature of the system. It is however, still possible to connect to Venus with bluetooth from a mobile app and then further to VRM. My guess (not yet verified) is that connecting bluetooth sensors will suffer.
 
 For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.
 
