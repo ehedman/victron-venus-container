@@ -2,6 +2,21 @@
 
 touch /data/start-gui
 
+# tslib support:
+# opkg update
+# opkg install qt4-embedded-plugin-mousedriver-tslib
+# opkg install tslib-calibrate
+# opkg install tslib-tests
+# run ts_calibrate and touch the screen in the right spots.
+export TSLIB_TSEVENTTYPE=INPUT
+export TSLIB_CONSOLEDEVICE=none
+export TSLIB_FBDEVICE=/dev/fb0
+export TSLIB_TSDEVICE=/dev/input/touchscreen0
+export TSLIB_CALIBFILE=/etc/pointercal
+export TSLIB_CONFFILE=/etc/ts.conf
+export TSLIB_PLUGINDIR=/usr/lib/ts
+export QWS_MOUSE_PROTO=tslib:/dev/input/touchscreen0
+
 function startGuiVnc()
 {
 
@@ -19,14 +34,6 @@ do
         startGuiVnc
 
     elif [ "$(cat /data/start-gui)" == "start-gui" ]; then
-        #export TSLIB_TSEVENTTYPE=INPUT
-        export TSLIB_CONSOLEDEVICE=none
-        export TSLIB_FBDEVICE=/dev/fb0
-        #export TSLIB_TSDEVICE=/dev/input/event3
-        export TSLIB_CALIBFILE=/etc/pointercal
-        export TSLIB_CONFFILE=/etc/ts.conf
-        export TSLIB_PLUGINDIR=/usr/lib/ts
-        #export QWS_MOUSE_PROTO=tslib:/dev/input/event3
 
         cd /tmp && nohup /opt/victronenergy/gui/gui -display LinuxFb:
         echo "done" > /data/start-gui

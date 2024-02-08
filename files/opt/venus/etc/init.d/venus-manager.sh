@@ -90,7 +90,7 @@ if [ "$1" == "boot" ]; then
     fi
 
    {
-        /opt/victronenergy/localsettings/localsettings.py &
+        svc -u /service/localsettings
 
         /etc/init.d/start-gui.sh start-gui-vnc &
 
