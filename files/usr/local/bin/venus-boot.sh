@@ -1,5 +1,7 @@
 #!/bin/bash
 
+RO="no"
+
 function doChroot
 {
     exec chroot "$1" /etc/init.d/venus-manager.sh boot
@@ -47,6 +49,11 @@ if [ -z "$2" ]; then
     exit 1
 fi
 
+if [ "$3" = "ro" ]; then
+    echo "Info: (arg3) Venus root directory will be mounted read only"
+    RO="yes"
+fi
+
 case "$2" in
     chroot)
         BOOTM=doChroot
@@ -85,8 +92,23 @@ if ! mkdir -p "$ROOT"/lib/overlay/upper "$ROOT"/lib/overlay/work; then
     exit 1
 fi
 
+mount -o,remount,rw "$ROOT" &>/dev/null
+
+if [ "$RO" = "yes" ]; then
+   if ! mount -o,remount,ro "$ROOT" &>/dev/null; then
+       mount -B -o,ro "$ROOT" "$ROOT"
+   fi
+fi
+
+UPPER="/tmp/venus/upper"
+WORK="/tmp/venus/work"
+LOWER="/lib/modules"
+MERGED="$ROOT/lib/modules"
+
+mkdir -p "$UPPER" "$WORK"
+
 if [ -d "$ROOT"/lib/modules ]; then
-    if ! mount overlay -t overlay -t overlay -o lowerdir=/lib/modules,upperdir="$ROOT"/lib/overlay/upper,workdir="$ROOT"/lib/overlay/work "$ROOT"/lib/modules &>/dev/null; then
+    if ! mount overlay -t overlay -t overlay -o lowerdir="$LOWER",upperdir="$UPPER",workdir="$WORK" "$MERGED" &>/dev/null; then
         echo "CRITICAL: Failed to overlay-fs to $ROOT/lib/modules"
     fi
 fi

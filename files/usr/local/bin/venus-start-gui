@@ -1,9 +1,12 @@
 #!/bin/bash
 
 if test -f /run/venus-root; then
-    echo "start-gui" >  "$(cat /run/venus-root)"/data/start-gui
+#    echo "start-gui" >  "$(cat /run/venus-root)"/data/start-gui
+     echo "start-gui" > /run/udev/data/start-gui
     sleep 2
-    inotifywait -q -e modify "$(cat /run/venus-root)"/data/start-gui
+#    inotifywait -q -e modify "$(cat /run/venus-root)"/data/start-gui
+    inotifywait -q -e modify /run/udev/data/start-gui
+
     exit 0
 fi
 

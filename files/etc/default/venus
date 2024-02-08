@@ -1,3 +1,4 @@
 ROOTDIR=/opt/venus
 METHOD=docker
+ACCESS=ro
 

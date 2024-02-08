@@ -1,6 +1,6 @@
 #!/bin/bash
 
-touch /data/start-gui
+touch /run/udev/data/start-gui
 
 # tslib support:
 # opkg update
@@ -27,16 +27,16 @@ startGuiVnc
 
 while true
 do
-    inotifywait -e modify /data/start-gui
+    inotifywait -e modify /run/udev/data/start-gui
 
-    if [ "$(cat /data/start-gui)" == "start-gui-vnc" ]; then
+    if [ "$(cat/run/udev/data/start-gui)" == "start-gui-vnc" ]; then
 
         startGuiVnc
 
-    elif [ "$(cat /data/start-gui)" == "start-gui" ]; then
+    elif [ "$(cat /run/udev/data/start-gui)" == "start-gui" ]; then
 
         cd /tmp && nohup /opt/victronenergy/gui/gui -display LinuxFb:
-        echo "done" > /data/start-gui
+        echo "done" > /run/udev/data/start-gui
 
         if ! pidof -q gui; then
             startGuiVnc
