@@ -37,8 +37,8 @@ To start with docker, an initial container must be created:
 ### To test docker  stand-alone:
 - with bash only: docker run --rm -it --privileged  --hostname=venus --net=host  -v/opt/venus:/opt  -v/run/udev/data:/opt/data/udev --platform linux/arm64/v8 arm64v8/debian  bash
 - full venus os: docker run --rm -it --privileged  --hostname=venus --net=host  -v/opt/venus:/opt -v/run/udev/data:/opt/data/udev  --platform linux/arm64/v8  arm64v8/debian  sh -c 'chroot /opt /etc/init.d/venus-manager.sh boot'<br>
-Assuming here that the modified venus wic image is available (mounted or copied) to /opt/venus<br>
-Please note that this solution is not a venus docker as such but rather a generic arm64 debian docker used to encapsulate a venus wic image residning in a folder of the host system or as a mounted partition 2 venus wic image.
+Assuming here that the modified venus wic image is available (mounted or copied) to /opt/venus.<br>
+**Please note** that this solution is not a venus docker as such but rather a generic arm64 debian docker used to encapsulate a venus wic image residning in a folder of the host system or as a mounted partition 2 venus wic image.
 
 ### From systemd
 - First fix  /etc/default/venus to reflect rootfs for venus and boot method
