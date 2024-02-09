@@ -29,7 +29,7 @@ if [ "$1" == "boot" ]; then
 
     if [ "$(mount | grep "lib/modules" | awk '{print $1}')" = "overlay" ]; then
         echo "Unpacking xz modules in /lib/modules. This will take a few seconds ..."    
-        find /lib/modules/ -name "*.ko.xz" -exec xz -d {} \;
+        find /lib/modules/$(uname -r) -name "*.ko.xz" -exec xz -d {} \;
         echo "Done"
     fi
 
