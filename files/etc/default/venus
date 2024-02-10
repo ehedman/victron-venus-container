@@ -1,4 +1,5 @@
 ROOTDIR=/opt/venus
 METHOD=docker
-ACCESS=ro
+ACCESS=rw
+VRM_IFACE=eth0
 

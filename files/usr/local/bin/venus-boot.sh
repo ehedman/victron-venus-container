@@ -1,9 +1,15 @@
 #!/bin/bash
 
-RO="no"
+if [ $# -ne 4 ]; then
+    echo "Error: four arguments required"
+    echo "Usage: vroot method access iface"
+    echo "Example: /opt/venus docker rw eth0"
+    exit 1
+fi
 
 function doChroot
 {
+    export VRM_IFACE
     exec chroot "$1" /etc/init.d/venus-manager.sh boot
 }
 
@@ -13,6 +19,7 @@ function doDocker
      --privileged \
      --hostname=venus \
      --net=host \
+     -e VRM_IFACE=$VRM_IFACE \
      -v/"$1":/opt \
      -v/run/udev/data:/opt/data/udev \
      --platform linux/arm64/v8 arm64v8/debian \
@@ -21,6 +28,7 @@ function doDocker
 
 function doNspawn
 {
+    unset VRM_IFACE
     exec systemd-nspawn -D  "$1" --link-journal=no \
      --bind=/dev/tty0 \
      --bind=/dev/ttyS0 \
@@ -52,7 +60,16 @@ fi
 if [ "$3" = "ro" ]; then
     echo "Info: (arg3) Venus root directory will be mounted read only"
     RO="yes"
+else
+    RO="no"
 fi
+
+if [ ! -L /sys/class/net/$4 ]; then
+    echo "Error(arg4): The network interface $VRM_IFACE does not exist"
+    exit 1
+fi
+
+VRM_IFACE=$4
 
 case "$2" in
     chroot)
@@ -70,9 +87,8 @@ case "$2" in
     ;;
 esac
 
-
 if [ ! -d "$1"/service ]; then
-    echo "Error: $1 not a directory root for venus"
+    echo "Error: (arg1) $1 not a directory root for venus"
     exit 1
 fi
 

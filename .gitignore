@@ -1,1 +1,4 @@
+.gitignore
 main.conf
+default_server
+index404.php

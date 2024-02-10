@@ -2,6 +2,8 @@
 
 BT="no"
 
+#export VRM_IFACE=eth1
+
 if [ "$1" == "boot" ]; then
 
     if test -d /sys/class/net/mv-eth0; then
@@ -10,8 +12,6 @@ if [ "$1" == "boot" ]; then
         mount /dev
         mount /dev/pts
         mount /data/log
-        sed -i /82/s//80/ /etc/nginx/sites-enabled/default_server
-        sed -i /'Port 23'/s//'Port 22'/ etc/ssh/sshd_config
 
         ifup eth0
         udhcpc -i eth0
@@ -19,10 +19,6 @@ if [ "$1" == "boot" ]; then
     else
         # This is  for chroot/docker booted system
         mount -a
-        # The lines below are only necessary if a web and/or an sshd server is already running on the 'host'
-        # I.e, the remote console must be invoked with the :82 port declaration on the url line.
-        sed -i /80/s//82/ /etc/nginx/sites-enabled/default_server
-        sed -i /'Port 22'/s//'Port 23'/ /etc/ssh/sshd_config
         BT="yes"
     fi
 
@@ -80,6 +76,8 @@ if [ "$1" == "boot" ]; then
         ;;
         esac                  
     done
+
+#  connmanctl config ethernet_00133b05016f_cable --ipv4 manual 192.168.2.72 255.255.255.192
 
     sleep 3
 
