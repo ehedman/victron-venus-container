@@ -23,13 +23,11 @@ function startGuiVnc()
     cd /tmp && nohup /opt/victronenergy/gui/gui -display VNC:size=800x480:depth=32:passwordFile=/data/conf/vncpassword.txt:0 &
 }
 
-startGuiVnc
-
 while true
 do
     inotifywait -e modify /run/udev/data/start-gui
 
-    if [ "$(cat/run/udev/data/start-gui)" == "start-gui-vnc" ]; then
+    if [ "$(cat /run/udev/data/start-gui)" == "start-gui-vnc" ]; then
 
         startGuiVnc
 
