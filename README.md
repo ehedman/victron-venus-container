@@ -17,13 +17,14 @@ Unfortunately systemd-nspawn (macvlan interface) does not today allow for wirele
 It is however, still possible to connect to Venus with bluetooth from a mobile app and then further to VRM.<br>
 In this situation the outgoing traffic to sensors won't work and consequentially the I/O menu in setting won't show up.
 
-For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.
+For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.<br>
+If the wifi interfaces are not in AP mode or free to use, then they can show up in the venous system as well.
 
 ### Make sure venus not hijacking your other network interfaces
 As explained above, I want to have two wifi APs on the host side untouched by venus.
 - Add interface names to the file /etc/connman/main.conf at line beginning with NetworkInterfaceBlacklist=
 
-In summary the chroot:ed system and docker gives 100% connectivity (through ethernet) to the outher world such as VRM and signalK etc.
+In summary the chroot:ed system and docker gives 100% connectivity to the outher world such as VRM and signalK etc.
 
 The systemd-nspawn managed system gives the same but limited bluetooth.
 
