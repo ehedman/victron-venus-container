@@ -18,7 +18,7 @@ It is however, still possible to connect to Venus with bluetooth from a mobile a
 In this situation the outgoing traffic to sensors won't work and consequentially the I/O menu in setting won't show up.
 
 For wifi that is not a problem i my case since the host provides AP over wifi and that would in any case be a conflict with venus as it is intended to be a wifi client.<br>
-If the wifi interfaces are not in AP mode or free to use, then they can show up in the venous system as well.
+If the wifi interfaces are not in AP mode or free to use, then they can show up in the venus system as well.
 
 ### Make sure venus not hijacking your other network interfaces
 As explained above, I want to have two wifi APs on the host side untouched by venus.
@@ -61,7 +61,7 @@ Eventually you have to deal with port conflicts between the host and the venus s
 ### host network interface renaming
 Since the bookworm OS default network interface name (when set to predictable in raspi-config) is set to end0, then a renaming is necessary either on the host or by passing an environment variable to the venus subsystem.
 You may add this rule into /etc/udev/rules.d/99-(some file)<br>
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="e4:5f:01:9a:c1:7a", NAME="eth0"|br>
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="e4:5f:01:9a:c1:7a", NAME="eth0"<br>
 Or pass the enviromnet variabe **VRM_IFACE=ethX** to the venus system. This is a valid argument for the venus-boot.sh script.
 
 ### What about 32 and 64 bit systems
