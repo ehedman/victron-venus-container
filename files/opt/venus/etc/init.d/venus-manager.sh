@@ -2,8 +2,6 @@
 
 BT="no"
 
-#export VRM_IFACE=eth1
-
 if [ "$1" == "boot" ]; then
 
     if test -d /sys/class/net/mv-eth0; then
@@ -76,8 +74,6 @@ if [ "$1" == "boot" ]; then
         ;;
         esac                  
     done
-
-#  connmanctl config ethernet_00133b05016f_cable --ipv4 manual 192.168.2.72 255.255.255.192
 
     sleep 3
 
