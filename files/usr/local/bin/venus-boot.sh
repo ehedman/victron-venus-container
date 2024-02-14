@@ -28,21 +28,15 @@ function doDocker
 
 function doNspawn
 {
-    unset VRM_IFACE
     exec systemd-nspawn -D  "$1" --link-journal=no \
      --bind=/dev/tty0 \
      --bind=/dev/ttyS0 \
      --bind=/dev/ttyUSB0 \
      --bind=/dev/fb0 \
      --bind=/dev/vhci \
-     --bind=/dev/input/event0 \
-     --bind=/dev/input/event1 \
-     --bind=/dev/input/event2 \
-     --bind=/dev/input/event3 \
-     --bind=/dev/input/event4 \
-     --bind=/dev/input/event5 \
-     --network-macvlan=eth0 \
-      --private-network \
+     --bind=/dev/input/touchscreen0 \
+     --network-macvlan=$VRM_IFACE \
+     --private-network \
      --capability="CAP_NET_ADMIN,CAP_SYS_MODULE,CAP_SYS_RAWIO,CAP_SYS_ADMIN,CAP_SYS_PTRACE" \
     /etc/init.d/venus-manager.sh boot
 }
