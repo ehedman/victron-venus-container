@@ -35,6 +35,7 @@ if [ "$1" == "boot" ]; then
     mkdir -p /var/lock/swupdate
     mkdir -p /var/volatile/log/nginx
     mkdir /run/nginx
+    mkdir /run/flashmq
     echo 0 > /tmp/last_boot_type
     /usr/bin/csocket /run/dbus/system_bus_socket
 
