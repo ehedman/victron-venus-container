@@ -42,9 +42,9 @@ if [ "$1" == "boot" ]; then
     # Remove devices not to be touched by venus
     rm -f /dev/serial-starter/ttyACM0
 
-    if  [ "$(ls -A /data/udev)" ] && [ ! -d /run/udev/data ] ; then
+    if  [ "$(ls -A /udev)" ] && [ ! -d /run/udev/data ] ; then
         mkdir -p /run/udev/data
-        mount -B /data/udev /run/udev/data
+        mount -B /udev /run/udev/data
     else
         echo "CRITICAL: $0: No population of /run/udev/data"
     fi
