@@ -9,7 +9,12 @@ if [ "$1" == "boot" ]; then
         mount /run
         mount /dev
         mount /dev/pts
+        mount /sys/fs/pstore
+        mount /dev/shm 
         mount /data/log
+        mount /var/volatile
+        mount /var/lib
+        mount /dev/mqueue
 
         ifup eth0
         udhcpc -i eth0

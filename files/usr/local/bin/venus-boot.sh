@@ -21,7 +21,10 @@ export VRM_IFACE="$4"
 
 function doChroot
 {
-    exec chroot "$NODE_PATH" /etc/init.d/venus-manager.sh boot
+    if mount -B "$DATA_BASE" "$NODE_PATH"/data &>/dev/null; then
+        chroot "$NODE_PATH" /etc/init.d/venus-manager.sh boot
+    fi
+    umount "$NODE_PATH"/data &>/dev/null
 }
 
 function doDocker
@@ -32,7 +35,7 @@ function doDocker
      --net=host \
      -e VRM_IFACE="$VRM_IFACE" \
      -v"$NODE_PATH":/opt \
-     -v"$NODE_BASE"/"$NODE"-data:/opt/data \
+     -v"$DATA_BASE":/opt/data \
      -v/run/udev/data:/opt/udev \
      --platform linux/arm64/v8 arm64v8/debian \
     sh -c 'chroot /opt /etc/init.d/venus-manager.sh boot'
@@ -47,6 +50,7 @@ function doNspawn
      --bind=/dev/fb0 \
      --bind=/dev/vhci \
      --bind=/dev/input/touchscreen0 \
+     --bind "$NODE_BASE"/"$NODE"-data:/data \
      --network-macvlan="$VRM_IFACE" \
      --private-network \
      --capability="CAP_NET_ADMIN,CAP_SYS_MODULE,CAP_SYS_RAWIO,CAP_SYS_ADMIN,CAP_SYS_PTRACE" \
@@ -91,14 +95,14 @@ if [ ! -d "$NODE_PATH"/service ]; then
     exit 1
 fi
 
-if [ -d "$NODE_PATH"/run/dbus ]; then
+if [ -f /run/"$NODE"-root ]; then
     echo "Already running. Can't be restarted, Please reboot the system"
     exit 1
 fi
 
-rm -f /run/"$NODE"-root
-
-umount "$NODE_PATH"/lib/modules &>/dev/null
+umount "$NODE_PATH"/data &>/dev/null || true
+umount "$NODE_PATH"/udev &>/dev/null || true
+umount "$NODE_PATH"/lib/modules &>/dev/null || true
 
 if ! mkdir -p "$NODE_PATH"/lib/overlay/upper "$NODE_PATH"/lib/overlay/work; then
     echo "Error: failed to create folders for overlayfs"
@@ -109,7 +113,7 @@ mount -o,remount,rw "$NODE_PATH" &>/dev/null
 
 if [ "$RO" = "yes" ]; then
    if ! mount -o,remount,ro "$NODE_PATH" &>/dev/null; then
-       mount -B -o,ro "$NODE_PATH" "$NODE_PATH"
+       mount -B -o,ro "$NODE_PATH" "$NODE_PATH" &>/dev/null
    fi
 fi
 
@@ -129,8 +133,8 @@ fi
 if [ ! -d "$DATA_BASE" ]; then
     mkdir "$DATA_BASE" || exit
     echo "Populating venus data folder at $DATA_BASE"
-    archive=$(grep --text --line-number 'ARCHIVE:$' $0 | cut -d: -f1)
-    tail -n +$((archive + 1)) $0 | base64 -d | tar  xf - -C $DATA_BASE || exit
+    archive=$(grep --text --line-number 'ARCHIVE:$' "$0" | cut -d: -f1)
+    tail -n +$((archive + 1)) "$0" | base64 -d | tar  xf - -C "$DATA_BASE" || exit
     sed -r 's/://g' /sys/class/net/"$VRM_IFACE"/address > "$DATA_BASE/venus/unique-id"
 fi
 
@@ -139,7 +143,7 @@ if [ -d "$NODE_PATH"/udev ] && [ -d /run/udev/data ]; then
     echo  "$NODE_PATH" >/run/"$NODE"-root
 
     if test -e "$NODE_PATH"/udev/mp; then
-        mount -B /run/udev/data "$NODE_PATH"/data/udev &>/dev/null
+        mount -B /run/udev/data "$NODE_PATH"/udev &>/dev/null
     fi
 
     "$BOOTM" "$NODE_PATH"
