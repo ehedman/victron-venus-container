@@ -89,6 +89,12 @@ if [ "$1" == "boot" ]; then
         svc -t /service/dbus-ble-sensors /service/vesmart-server
     fi
 
+    if  [ -d /etc/init.d/custom.d ] && [ "$(ls -A /etc/init.d/custom.d)" ] && [ -e /etc/init.d/custom.d/S* ]; then
+        for file in /etc/init.d/custom.d/S*; do
+            $file start
+       done
+    fi
+
    {
         svc -u /service/localsettings
 
