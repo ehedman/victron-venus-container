@@ -9,7 +9,7 @@ ConditionPathExists=/opt/venus
 Type=simple
 EnvironmentFile=/etc/default/venus
 ExecStart=/usr/local/bin/venus-boot.sh  $ROOTDIR $METHOD $ACCESS $VRM_IFACE
-ExecStop=/bin/sh -c "docker stop $(docker ps | grep debian | awk '{print $1}')"
+ExecStop=/bin/sh -c "docker stop $(docker ps | grep debian | awk '{print $1}'); rm -f /run/venus-root"
 RemainAfterExit=no
 User=root
 

@@ -89,10 +89,12 @@ if [ "$1" == "boot" ]; then
         svc -t /service/dbus-ble-sensors /service/vesmart-server
     fi
 
-    if  [ -d /etc/init.d/custom.d ] && [ "$(ls -A /etc/init.d/custom.d)" ] && [ -e /etc/init.d/custom.d/S* ]; then
+    if  [ -d /etc/init.d/custom.d ] && [ $(ls -A /etc/init.d/custom.d/S* 2>/dev/null | wc -w) -gt 0 ]; then
+        echo "Starting customized services:"
         for file in /etc/init.d/custom.d/S*; do
+            echo $file start
             $file start
-       done
+        done
     fi
 
    {
