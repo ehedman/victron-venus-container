@@ -28,10 +28,10 @@ In summary the chroot:ed system and docker gives 100% connectivity to the outher
 
 The systemd-nspawn managed system gives the same but limited bluetooth.
 
-An interesting consequence of ths implementation is that venus now is running on a **bookworm (minimal) 32-bit OS on a raperry pi 4 with a 6.10 64bit Linux kernel** as opposed to the standard boot image with kernel 5.10
+An interesting consequence of ths implementation is that venus now is running on a **bookworm (minimal) 32-bit OS on a raperry pi 5 with a 6.1 64bit Linux kernel** as opposed to the standard boot image with kernel 5.10
 
 ### NOTE
-- This stuff is still kind of experimental loosely bound to venus v3.30-2 a 7" hdmi display, Bookworm on rasperry pi 4 Rev 1.5. Local adaptations may be necessary.
+- This application is currently bound to venus v3.30-2 a 7" hdmi display, Bookworm on Rasperry Pi 5 B Rev 1.0. Local adaptations may be necessary.
 
 To start with docker, an initial container must be created:
 -  docker run -it --platform linux/arm64/v8 arm64v8/debian
@@ -51,9 +51,9 @@ For regular use the script venus-boot.sh should be used in order to have the com
 ### From shell
 - /usr/local/bin/venus-boot.sh [ rootdir for venus ] [ method=chroot:systemd-nspawn:docker ]
 - To start the Qt-gui on the raperry-pi display: /usr/local/bin/venus-start-gui (from the host shell or from shell call from another app)
-- The remote console is always active but may run on port 80.
+- The remote console is always active on port 80.
 
-Eventually you have to deal with port conflicts between the host and the venus system, though not for the systemd-nspawn booted system.
+Eventually you have to deal with port conflicts between the host and the venus guest system (possibly for port 80 and 22), though not for the systemd-nspawn booted system.
 
 ### NOTE
 - The reboot function in /opt/victronenergy/gui/qml/PageSettingsGeneral.qml is now altered to Qt.quit()
