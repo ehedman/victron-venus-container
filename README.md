@@ -65,6 +65,8 @@ SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="e4:5f:01:9a:c1:7a", NAME="eth0"
 Or pass the enviromnet variabe **VRM_IFACE=ethX** to the venus system. This is a valid argument for the venus-boot.sh script.
 
 ### What about 32 and 64 bit systems
-Bookworm 32-bit has still a 64 bit kernel and it is running 32 bit binaries in user space. This implementation is tested on such a system and 64 bit bookworm is not tested.<br>
+Bookworm 32-bit has still a 64 bit kernel (on rpi4-5) and it is running 32 bit binaries in user space. This implementation is tested on such a system and 64 bit bookworm is not tested.<br>
 This explains why we are loading a linux/arm64/v8 docker to the system.
 
+### More about 64-bit hosts
+Check the file /opt/victronenergy/dbus-i2c/dbus-i2c.py in the Venus domain, a line reading "bus=dbus.SystemBus() if (platform.machine() ==  'xxx' ...". The xxx should be alterred to what you get from the host command "uname -m" i.e. aarch64 for the 64-bit system.

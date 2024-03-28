@@ -14,8 +14,8 @@ ACTION=="add", ENV{ID_BUS}=="usb", ENV{ID_MODEL}=="CP2102_USB_to_UART_Bridge_Con
 # DRF2658C Zigbee converter with CH340 chip
 ACTION=="add", ENV{ID_BUS}=="usb", ENV{ID_VENDOR_ID}=="1a86", ENV{ID_MODEL_ID}=="7523", ENV{VE_SERVICE}="cgwacs:default"
 
-# GPS on ttyS0 on pi4
-ACTION=="add", ENV{DEVNAME}=="/dev/ttyS0", SUBSYSTEM=="tty", ENV{VE_SERVICE}="cgwacs:default"
+# GPS on ttyAMA0 on pi5
+#ACTION=="add", ENV{DEVNAME}=="/dev/ttyAMA0", SUBSYSTEM=="tty", ENV{VE_SERVICE}="cgwacs:default"
 
 # VE.Direct cable should have a specific model-id, if not set it is a FT232EX.
 ACTION=="add", ENV{ID_BUS}=="usb", ENV{ID_MODEL}=="VE_Direct_cable",            ENV{VE_SERVICE}="vedirect"

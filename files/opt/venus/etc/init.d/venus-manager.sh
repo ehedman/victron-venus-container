@@ -93,7 +93,7 @@ if [ "$1" == "boot" ]; then
         echo "Starting customized services:"
         for file in /etc/init.d/custom.d/S*; do
             echo $file start
-            $file start
+            $file start &
         done
     fi
 
