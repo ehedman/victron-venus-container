@@ -1,5 +1,5 @@
 # victron-venus-container
-README Feb-2024
+README April-2024
 
 What is Victron Venus for Rasperry Pi. Read: [Raspberry Pi running Victron’s Venus firmware](https://www.victronenergy.com/blog/2017/09/06/raspberry-pi-running-victrons-venus-firmware)
 
@@ -36,6 +36,21 @@ An interesting consequence of ths implementation is that venus now is running on
 To start with docker, an initial container must be created:
 -  docker run -it --platform linux/arm64/v8 arm64v8/debian
 
+### Quick start for evaluation purposes
+Download a ready-to-go image from:
+- wget http://hedmanshome.se/venus.gz
+- List content: gzip -d venus.gz -c|cpio -it
+- Extract content: gzip -d venus.gz -c|cpio -imVd<br>
+This image is created on a Raspberry Pi 4 OS Lite Bookworm 32-bit system (64-bit kernel)<br>
+Then install the host tools from the repository:<br>
+cd victron-venus-container/files<br>
+cp -r etc usr /<br>
+Chech the new content in /etc/udev/rules.d/99-venus-* to keep them or alter them to your needs.<br>
+Then:
+- /usr/local/bin/venus-boot.sh /otp/venus docker rw end0<br>
+Assuming: venus-root=/opt/venus, method=docker access=ro/rw net-if=end0
+
+
 ### To test docker  stand-alone:
 - with bash only: docker run --rm -it --privileged  --hostname=venus --net=host  -v/opt/venus:/opt  -v/run/udev/data:/opt/data/udev --platform linux/arm64/v8 arm64v8/debian  bash
 - full venus os: docker run --rm -it --privileged  --hostname=venus --net=host  -v/opt/venus:/opt -v/run/udev/data:/opt/data/udev  --platform linux/arm64/v8  arm64v8/debian  sh -c 'chroot /opt /etc/init.d/venus-manager.sh boot'<br>
@@ -49,7 +64,7 @@ For regular use the script venus-boot.sh should be used in order to have the com
 - systemctl start venus-system.service
 
 ### From shell
-- /usr/local/bin/venus-boot.sh [ rootdir for venus ] [ method=chroot:systemd-nspawn:docker ]
+- /usr/local/bin/venus-boot.sh [ rootdir for venus ] [ method=chroot:systemd-nspawn:docker ] [ net-if ]
 - To start the Qt-gui on the raperry-pi display: /usr/local/bin/venus-start-gui (from the host shell or from shell call from another app)
 - The remote console is always active on port 80.
 
@@ -70,3 +85,4 @@ This explains why we are loading a linux/arm64/v8 docker to the system.
 
 ### More about 64-bit hosts
 Check the file /opt/victronenergy/dbus-i2c/dbus-i2c.py in the Venus domain, a line reading "bus=dbus.SystemBus() if (platform.machine() ==  'xxx' ...". The xxx should be alterred to what you get from the host command "uname -m" i.e. aarch64 for the 64-bit system.
+
